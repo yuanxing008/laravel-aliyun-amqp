@@ -4,17 +4,17 @@
  * Date: 2020-05-08 13:57
  */
 
-namespace Joker\LaravelAliyunAmqp\Command;
+namespace JokerProject\LaravelAliyunAmqp\Command;
 
 use Illuminate\Console\Command;
-use Joker\LaravelAliyunAmqp\Container;
-use Joker\LaravelAliyunAmqp\Entity\QueueEntity;
-use Joker\LaravelAliyunAmqp\PublisherInterface;
+use JokerProject\LaravelAliyunAmqp\Container;
+use JokerProject\LaravelAliyunAmqp\Entity\QueueEntity;
+use JokerProject\LaravelAliyunAmqp\PublisherInterface;
 
 /**
  * Class DeleteAllCommand
  *
- * @package Joker\LaravelAliyunAmqp\Commad
+ * @package JokerProject\LaravelAliyunAmqp\Commad
  */
 class DeleteAllCommand extends Command
 {

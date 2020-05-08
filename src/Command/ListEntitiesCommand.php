@@ -4,17 +4,17 @@
  * Date: 2020-05-08 13:57
  */
 
-namespace Joker\LaravelAliyunAmqp\Command;
+namespace JokerProject\LaravelAliyunAmqp\Command;
 
 use Illuminate\Console\Command;
-use Joker\LaravelAliyunAmqp\Container;
+use JokerProject\LaravelAliyunAmqp\Container;
 use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Helper\TableSeparator;
 
 /**
  * Class ListEntitiesCommand
  *
- * @package Joker\LaravelAliyunAmqp\Commad
+ * @package JokerProject\LaravelAliyunAmqp\Commad
  */
 class ListEntitiesCommand extends Command
 {

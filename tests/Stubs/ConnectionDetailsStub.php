@@ -1,7 +1,7 @@
 <?php
-namespace Tests\Joker\LaravelAliyunAmqp\Stubs;
+namespace Tests\JokerProject\LaravelAliyunAmqp\Stubs;
 
-use Joker\LaravelAliyunAmqp\AMQPConnection;
+use JokerProject\LaravelAliyunAmqp\AMQPConnection;
 
 class ConnectionDetailsStub extends AMQPConnection
 {

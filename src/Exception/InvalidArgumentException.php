@@ -4,12 +4,12 @@
  * Date: 2020-05-08 13:57
  */
 
-namespace Joker\LaravelAliyunAmqp\Exception;
+namespace JokerProject\LaravelAliyunAmqp\Exception;
 
 /**
  * Class InvalidArgumentException
  *
- * @package Joker\LaravelAliyunAmqp\Exception
+ * @package JokerProject\LaravelAliyunAmqp\Exception
  * @codeCoverageIgnore
  */
 class InvalidArgumentException extends \InvalidArgumentException implements LaravelRabbitMqException

@@ -4,12 +4,12 @@
  * Date: 2020-05-08 13:57
  */
 
-namespace Joker\LaravelAliyunAmqp;
+namespace JokerProject\LaravelAliyunAmqp;
 
 /**
  * Interface PublisherInterface
  *
- * @package Joker\LaravelAliyunAmqp\Publisher
+ * @package JokerProject\LaravelAliyunAmqp\Publisher
  * @author  Adrian Tilita <adrian@tilita.ro>
  */
 interface PublisherInterface

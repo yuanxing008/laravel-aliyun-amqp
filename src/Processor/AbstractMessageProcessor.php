@@ -4,7 +4,7 @@
  * Date: 2020-05-08 13:57
  */
 
-namespace Joker\LaravelAliyunAmqp\Processor;
+namespace JokerProject\LaravelAliyunAmqp\Processor;
 
 use PhpAmqpLib\Message\AMQPMessage;
 use Psr\Log\LoggerAwareInterface;
@@ -13,7 +13,7 @@ use Psr\Log\LoggerAwareTrait;
 /**
  * Class AbstractMessageProcessor
  *
- * @package Joker\LaravelAliyunAmqp\Processor
+ * @package JokerProject\LaravelAliyunAmqp\Processor
  */
 abstract class AbstractMessageProcessor implements MessageProcessorInterface, LoggerAwareInterface
 {

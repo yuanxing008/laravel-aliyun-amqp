@@ -4,13 +4,13 @@
  * Date: 2020-05-08 13:57
  */
 
-namespace Joker\LaravelAliyunAmqp\Entity;
+namespace JokerProject\LaravelAliyunAmqp\Entity;
 
-use Joker\LaravelAliyunAmqp\AMQPConnection;
-use Joker\LaravelAliyunAmqp\ConsumerInterface;
-use Joker\LaravelAliyunAmqp\Processor\AbstractMessageProcessor;
-use Joker\LaravelAliyunAmqp\Processor\MessageProcessorInterface;
-use Joker\LaravelAliyunAmqp\PublisherInterface;
+use JokerProject\LaravelAliyunAmqp\AMQPConnection;
+use JokerProject\LaravelAliyunAmqp\ConsumerInterface;
+use JokerProject\LaravelAliyunAmqp\Processor\AbstractMessageProcessor;
+use JokerProject\LaravelAliyunAmqp\Processor\MessageProcessorInterface;
+use JokerProject\LaravelAliyunAmqp\PublisherInterface;
 use PhpAmqpLib\Channel\AMQPChannel;
 use PhpAmqpLib\Exception\AMQPProtocolChannelException;
 use PhpAmqpLib\Exception\AMQPTimeoutException;
@@ -22,7 +22,7 @@ use PhpAmqpLib\Exception\AMQPChannelClosedException;
 /**
  * Class QueueEntity
  *
- * @package Joker\LaravelAliyunAmqp\Entity
+ * @package JokerProject\LaravelAliyunAmqp\Entity
  */
 class QueueEntity implements PublisherInterface, ConsumerInterface, AMQPEntityInterface, LoggerAwareInterface
 {

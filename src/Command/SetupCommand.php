@@ -4,20 +4,20 @@
  * Date: 2020-05-08 13:57
  */
 
-namespace Joker\LaravelAliyunAmqp\Command;
+namespace JokerProject\LaravelAliyunAmqp\Command;
 
 use Illuminate\Console\Command;
-use Joker\LaravelAliyunAmqp\ConsumerInterface;
-use Joker\LaravelAliyunAmqp\Container;
-use Joker\LaravelAliyunAmqp\Entity\AMQPEntityInterface;
-use Joker\LaravelAliyunAmqp\Entity\ExchangeEntity;
-use Joker\LaravelAliyunAmqp\Entity\QueueEntity;
+use JokerProject\LaravelAliyunAmqp\ConsumerInterface;
+use JokerProject\LaravelAliyunAmqp\Container;
+use JokerProject\LaravelAliyunAmqp\Entity\AMQPEntityInterface;
+use JokerProject\LaravelAliyunAmqp\Entity\ExchangeEntity;
+use JokerProject\LaravelAliyunAmqp\Entity\QueueEntity;
 use PhpAmqpLib\Exception\AMQPProtocolChannelException;
 
 /**
  * Class SetupCommand
  *
- * @package Joker\LaravelAliyunAmqp\Commad
+ * @package JokerProject\LaravelAliyunAmqp\Commad
  */
 class SetupCommand extends Command
 {

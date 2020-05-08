@@ -4,7 +4,7 @@
  * Date: 2020-05-08 13:57
  */
 
-namespace Joker\LaravelAliyunAmqp;
+namespace JokerProject\LaravelAliyunAmqp;
 
 use PhpAmqpLib\Channel\AMQPChannel;
 use PhpAmqpLib\Connection\AbstractConnection;
@@ -14,7 +14,7 @@ use PhpAmqpLib\Connection\AMQPStreamConnection;
 /**
  * Class AMQPConnection
  *
- * @package Joker\LaravelAliyunAmqp
+ * @package JokerProject\LaravelAliyunAmqp
  */
 class AMQPConnection
 {

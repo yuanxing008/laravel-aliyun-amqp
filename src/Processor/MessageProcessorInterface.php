@@ -4,14 +4,14 @@
  * Date: 2020-05-08 13:57
  */
 
-namespace Joker\LaravelAliyunAmqp\Processor;
+namespace JokerProject\LaravelAliyunAmqp\Processor;
 
 use PhpAmqpLib\Message\AMQPMessage;
 
 /**
  * Interface MessageProcessorInterface
  *
- * @package Joker\LaravelAliyunAmqp\Processor
+ * @package JokerProject\LaravelAliyunAmqp\Processor
  * @author  Adrian Tilita <adrian@tilita.ro>
  */
 interface MessageProcessorInterface

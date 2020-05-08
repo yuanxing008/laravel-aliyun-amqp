@@ -4,14 +4,14 @@
  * Date: 2020-05-08 13:57
  */
 
-namespace Joker\LaravelAliyunAmqp\Command;
+namespace JokerProject\LaravelAliyunAmqp\Command;
 
 use Illuminate\Console\Command;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
-use Joker\LaravelAliyunAmqp\ConsumerInterface;
-use Joker\LaravelAliyunAmqp\Container;
-use Joker\LaravelAliyunAmqp\PublisherInterface;
+use JokerProject\LaravelAliyunAmqp\ConsumerInterface;
+use JokerProject\LaravelAliyunAmqp\Container;
+use JokerProject\LaravelAliyunAmqp\PublisherInterface;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -19,7 +19,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 /**
  * Class BasePublisherCommand
  *
- * @package Joker\LaravelAliyunAmqp\Command
+ * @package JokerProject\LaravelAliyunAmqp\Command
  */
 class BasePublisherCommand extends Command
 {

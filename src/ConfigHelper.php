@@ -4,12 +4,12 @@
  * Date: 2020-05-08 13:57
  */
 
-namespace Joker\LaravelAliyunAmqp;
+namespace JokerProject\LaravelAliyunAmqp;
 
 /**
  * Class ConfigHelper
  *
- * @package Joker\LaravelAliyunAmqp
+ * @package JokerProject\LaravelAliyunAmqp
  * @author  Adrian Tilita <adrian@tilita.ro>
  */
 class ConfigHelper
