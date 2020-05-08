@@ -4,12 +4,12 @@
  * Date: 2020-05-08 13:57
  */
 
-namespace Joker\LaravelAliyunAmqp\Entity;
+namespace JokerProject\LaravelAliyunAmqp\Entity;
 
 /**
  * Interface AMQPEntityInterface
  *
- * @package Joker\LaravelAliyunAmqp\Entity
+ * @package JokerProject\LaravelAliyunAmqp\Entity
  */
 interface AMQPEntityInterface
 {

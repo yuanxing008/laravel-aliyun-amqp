@@ -1,11 +1,11 @@
 <?php
 
-namespace Joker\LaravelAliyunAmqp;
+namespace JokerProject\LaravelAliyunAmqp;
 
 use PhpAmqpLib\Channel\AMQPChannel;
 use PhpAmqpLib\Connection\AbstractConnection;
 use PhpAmqpLib\Connection\AMQPStreamConnection;
-use Tests\Joker\LaravelAliyunAmqp\Stubs\ConnectionDetailsStub;
+use Tests\JokerProject\LaravelAliyunAmqp\Stubs\ConnectionDetailsStub;
 use PHPUnit\Framework\TestCase;
 
 class AMQPConnectionTest extends TestCase

@@ -4,15 +4,15 @@
  * Date: 2020-05-08 13:57
  */
 
-namespace Joker\LaravelAliyunAmqp;
+namespace JokerProject\LaravelAliyunAmqp;
 
-use Joker\LaravelAliyunAmqp\ConsumerInterface;
-use Joker\LaravelAliyunAmqp\PublisherInterface;
+use JokerProject\LaravelAliyunAmqp\ConsumerInterface;
+use JokerProject\LaravelAliyunAmqp\PublisherInterface;
 
 /**
  * Class Container
  *
- * @package Joker\LaravelAliyunAmqp
+ * @package JokerProject\LaravelAliyunAmqp
  * @author  Adrian Tilita <adrian@tilita.ro>
  */
 class Container

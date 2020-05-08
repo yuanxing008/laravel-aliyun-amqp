@@ -4,10 +4,10 @@
  * Date: 2020-05-08 13:57
  */
 
-namespace Joker\LaravelAliyunAmqp\Entity;
+namespace JokerProject\LaravelAliyunAmqp\Entity;
 
-use Joker\LaravelAliyunAmqp\AMQPConnection;
-use Joker\LaravelAliyunAmqp\PublisherInterface;
+use JokerProject\LaravelAliyunAmqp\AMQPConnection;
+use JokerProject\LaravelAliyunAmqp\PublisherInterface;
 use PhpAmqpLib\Channel\AMQPChannel;
 use PhpAmqpLib\Exception\AMQPChannelClosedException;
 use PhpAmqpLib\Exception\AMQPProtocolChannelException;
@@ -16,7 +16,7 @@ use PhpAmqpLib\Message\AMQPMessage;
 /**
  * Class ExchangeEntity
  *
- * @package Joker\LaravelAliyunAmqp\Entity
+ * @package JokerProject\LaravelAliyunAmqp\Entity
  */
 class ExchangeEntity implements PublisherInterface, AMQPEntityInterface
 {

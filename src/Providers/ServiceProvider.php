@@ -4,28 +4,28 @@
  * Date: 2020-05-08 13:57
  */
 
-namespace Joker\LaravelAliyunAmqp\Providers;
+namespace JokerProject\LaravelAliyunAmqp\Providers;
 
 use Illuminate\Foundation\Application;
 use Illuminate\Support\ServiceProvider as LaravelServiceProvider;
-use Joker\LaravelAliyunAmqp\Builder\ContainerBuilder;
-use Joker\LaravelAliyunAmqp\Command\BaseConsumerCommand;
-use Joker\LaravelAliyunAmqp\Command\BasePublisherCommand;
-use Joker\LaravelAliyunAmqp\Command\DeleteAllCommand;
-use Joker\LaravelAliyunAmqp\Command\SetupCommand;
-use Joker\LaravelAliyunAmqp\Command\ListEntitiesCommand;
-use Joker\LaravelAliyunAmqp\ConfigHelper;
-use Joker\LaravelAliyunAmqp\ConsumerInterface;
-use Joker\LaravelAliyunAmqp\Container;
-use Joker\LaravelAliyunAmqp\Exception\LaravelRabbitMqException;
-use Joker\LaravelAliyunAmqp\PublisherInterface;
+use JokerProject\LaravelAliyunAmqp\Builder\ContainerBuilder;
+use JokerProject\LaravelAliyunAmqp\Command\BaseConsumerCommand;
+use JokerProject\LaravelAliyunAmqp\Command\BasePublisherCommand;
+use JokerProject\LaravelAliyunAmqp\Command\DeleteAllCommand;
+use JokerProject\LaravelAliyunAmqp\Command\SetupCommand;
+use JokerProject\LaravelAliyunAmqp\Command\ListEntitiesCommand;
+use JokerProject\LaravelAliyunAmqp\ConfigHelper;
+use JokerProject\LaravelAliyunAmqp\ConsumerInterface;
+use JokerProject\LaravelAliyunAmqp\Container;
+use JokerProject\LaravelAliyunAmqp\Exception\LaravelRabbitMqException;
+use JokerProject\LaravelAliyunAmqp\PublisherInterface;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerInterface;
 
 /**
  * Class ServiceProvider
  *
- * @package Joker\LaravelAliyunAmqp\Providers
+ * @package JokerProject\LaravelAliyunAmqp\Providers
  * @author  Adrian Tilita <adrian@tilita.ro>
  */
 class ServiceProvider extends LaravelServiceProvider

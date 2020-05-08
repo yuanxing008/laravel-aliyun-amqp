@@ -4,12 +4,12 @@
  * Date: 2020-05-08 13:57
  */
 
-namespace Joker\LaravelAliyunAmqp\Exception;
+namespace JokerProject\LaravelAliyunAmqp\Exception;
 
 /**
  * Class ConnectionException
  *
- * @package Joker\LaravelAliyunAmqpException\Exception
+ * @package JokerProject\LaravelAliyunAmqpException\Exception
  * @codeCoverageIgnore
  */
 class ConnectionException implements LaravelRabbitMqException

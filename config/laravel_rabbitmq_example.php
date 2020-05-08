@@ -76,7 +76,7 @@ return [
         'consumerAliasName' => [
             'queue' => 'InternalAliasNameForTheQueue',
             'prefetch_count' => 10,
-            'message_processor' => \Joker\LaravelAliyunAmqp\Processor\CliOutputProcessor::class
+            'message_processor' => \JokerProject\LaravelAliyunAmqp\Processor\CliOutputProcessor::class
         ]
     ]
 ];

@@ -4,18 +4,18 @@
  * Date: 2020-05-08 13:57
  */
 
-namespace Joker\LaravelAliyunAmqp\Builder;
+namespace JokerProject\LaravelAliyunAmqp\Builder;
 
 use Illuminate\Support\Collection;
-use Joker\LaravelAliyunAmqp\AMQPConnection;
-use Joker\LaravelAliyunAmqp\Container;
-use Joker\LaravelAliyunAmqp\Entity\ExchangeEntity;
-use Joker\LaravelAliyunAmqp\Entity\QueueEntity;
+use JokerProject\LaravelAliyunAmqp\AMQPConnection;
+use JokerProject\LaravelAliyunAmqp\Container;
+use JokerProject\LaravelAliyunAmqp\Entity\ExchangeEntity;
+use JokerProject\LaravelAliyunAmqp\Entity\QueueEntity;
 
 /**
  * Class ContainerBuilder
  *
- * @package Joker\LaravelAliyunAmqp\Builder
+ * @package JokerProject\LaravelAliyunAmqp\Builder
  * @todo    Add config validator
  */
 class ContainerBuilder

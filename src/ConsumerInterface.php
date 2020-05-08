@@ -4,12 +4,12 @@
  * Date: 2020-05-08 13:57
  */
 
-namespace Joker\LaravelAliyunAmqp;
+namespace JokerProject\LaravelAliyunAmqp;
 
 /**
  * Interface ConsumerInterface
  *
- * @package Joker\LaravelAliyunAmqp\Consumer
+ * @package JokerProject\LaravelAliyunAmqp\Consumer
  * @author  Adrian Tilita <adrian@tilita.ro>
  */
 interface ConsumerInterface
