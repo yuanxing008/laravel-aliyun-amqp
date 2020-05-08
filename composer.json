@@ -20,12 +20,12 @@
   },
   "autoload": {
     "psr-4": {
-      "Joker\\LaravelAliyunAmqp\\": "src/"
+      "JokerProject\\LaravelAliyunAmqp\\": "src/"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "Tests\\Joker\\LaravelAliyunAmqp\\": "tests/"
+      "Tests\\JokerProject\\LaravelAliyunAmqp\\": "tests/"
     }
   },
   "extra": {
