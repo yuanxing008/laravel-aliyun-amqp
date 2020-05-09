@@ -16,7 +16,10 @@ return [
             # More info about timeouts can be found on https://www.rabbitmq.com/networking.html
             'read_write_timeout' => 8,   // default timeout for writing/reading (in seconds)
             'connect_timeout'    => 10,
-            'heartbeat'          => 4
+            'heartbeat'          => 4,
+            'access_key'=>'',
+            'access_secret' => '',
+            'resource_owner_id' => ''
         ]
     ],
     'exchanges' => [
