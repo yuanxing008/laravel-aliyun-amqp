@@ -9,7 +9,6 @@ class ConnectionDetailsStub extends AMQPConnection
     {
         $this->connectionDetails = $connectionDetails;
         $this->aliasName = $aliasName;
-        parent::__construct($this->aliasName, $this->connectionDetails);
     }
 
     public function getConnectionDetails()

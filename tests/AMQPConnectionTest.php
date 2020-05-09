@@ -10,48 +10,209 @@ use PHPUnit\Framework\TestCase;
 
 class AMQPConnectionTest extends TestCase
 {
-//    public function testCreateWithEmptyDetails()
-//    {
-//        $connection = ConnectionDetailsStub::createConnection('foo', []);
-//        $details = $connection->getConnectionDetails();
-//        $this->assertEquals('127.0.0.1', $details['hostname']);
-//        $this->assertEquals(5672, $details['port']);
-//        $this->assertEquals('guest', $details['username']);
-//        $this->assertEquals('guest', $details['password']);
-//        $this->assertEquals('/', $details['vhost']);
-//        $this->assertEquals(true, $details['lazy']);
-//        $this->assertEquals(3, $details['read_write_timeout']);
-//        $this->assertEquals(3, $details['connect_timeout']);
-//        $this->assertEquals(0, $details['heartbeat']);
-//    }
-
-    public function testCreateWithAllDetails()
+    public function testCreateWithEmptyDetails()
     {
-        $aliasName = 'aliyun';
-        $config = [
-            'hostname' => 'local',
-            'port' => 5672,
-            'username' => '',
-            'password' => '',
-            'vhost' => 'ahost',
-            'lazy' => false,
-            'read_write_timeout' => 3,
-            'connect_timeout' => 3,
-            'heartbeat' => 0,
-            'access_key' => '',
-            'access_secret' => '',
-            'resource_owner_id' => '',
-            'keep_alive' => false,
-        ];
-        $stub = new ConnectionDetailsStub($aliasName, $config);
-        $details = $stub->getConnectionDetails();
-        print_r($details);
+        $connection = ConnectionDetailsStub::createConnection('foo', []);
+        $details = $connection->getConnectionDetails();
+
+        $this->assertEquals('127.0.0.1', $details['hostname']);
         $this->assertEquals(5672, $details['port']);
-        $this->assertEquals(false, $details['lazy']);
-        $this->assertNotEmpty($details['username']);
-        $this->assertNotEmpty($details['password']);
+        $this->assertEquals('guest', $details['username']);
+        $this->assertEquals('guest', $details['password']);
+        $this->assertEquals('/', $details['vhost']);
+        $this->assertEquals(true, $details['lazy']);
         $this->assertEquals(3, $details['read_write_timeout']);
         $this->assertEquals(3, $details['connect_timeout']);
         $this->assertEquals(0, $details['heartbeat']);
+    }
+
+    public function testCreateWithAllDetails()
+    {
+        $connection = ConnectionDetailsStub::createConnection(
+            'foo',
+            [
+                'hostname' => 'foo',
+                'port' => 1,
+                'username' => 'bar',
+                'password' => 'baz',
+                'vhost' => 'ahost',
+                'lazy' => false,
+                'read_write_timeout' => 99,
+                'connect_timeout' => 98,
+                'heartbeat' => 97,
+                'access_key' => '123',
+                'access_secret' => '123',
+                'resource_owner_id' => '123',
+            ]
+        );
+
+        $details = $connection->getConnectionDetails();
+
+        $this->assertEquals('foo', $details['hostname']);
+        $this->assertEquals(1, $details['port']);
+        $this->assertEquals('bar', $details['username']);
+        $this->assertEquals('baz', $details['password']);
+        $this->assertEquals('ahost', $details['vhost']);
+        $this->assertEquals(false, $details['lazy']);
+        $this->assertEquals(99, $details['read_write_timeout']);
+        $this->assertEquals(98, $details['connect_timeout']);
+        $this->assertEquals(97, $details['heartbeat']);
+        $this->assertEquals('123', $details['access_key']);
+        $this->assertEquals('123', $details['access_secret']);
+        $this->assertEquals('123', $details['resource_owner_id']);
+    }
+
+    public function testCreateWithInvalidArgumentsDetails()
+    {
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage("Cannot create connection foo, received unknown arguments: foo, bar!");
+        ConnectionDetailsStub::createConnection(
+            'foo',
+            [
+                'foo' => 'bar',
+                'bar' => 'baz',
+            ]
+        );
+    }
+
+    public function testConnectionGetChannel()
+    {
+        $channelMock = $this->getMockBuilder(AMQPChannel::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $connectionMock = $this->getMockBuilder(AbstractConnection::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $connectionMock->expects($this->once())
+            ->method('channel')
+            ->willReturn($channelMock);
+
+        $amqpConnection = new class('foo', [], $connectionMock) extends AMQPConnection
+        {
+            /**
+             * @var AMQPStreamConnection
+             */
+            private $mock;
+
+            /**
+             *  constructor.
+             *
+             * @param string               $aliasName
+             * @param array                $connectionDetails
+             * @param AMQPStreamConnection $mock
+             */
+            public function __construct($aliasName, array $connectionDetails = [], $mock = null)
+            {
+                $this->mock = $mock;
+                parent::__construct($aliasName, $connectionDetails);
+            }
+
+            /**
+             * @return AbstractConnection
+             */
+            protected function getConnection(): AbstractConnection
+            {
+                return $this->mock;
+            }
+        };
+
+        $this->assertEquals($channelMock, $amqpConnection->getChannel());
+    }
+
+    public function testAliasName()
+    {
+        $amqpConnection = new AMQPConnection('foo', []);
+        $this->assertEquals($amqpConnection->getAliasName(), 'foo');
+    }
+
+    public function testLazyConnection()
+    {
+        $tester = $this;
+
+        new class('foo', ['lazy' => false], $tester) extends AMQPConnection
+        {
+            /**
+             * @var null|TestCase
+             */
+            private $tester;
+
+            /**
+             *  constructor.
+             *
+             * @param string $aliasName
+             * @param array  $connectionDetails
+             * @param null   $tester
+             */
+            public function __construct($aliasName, array $connectionDetails = [], $tester = null)
+            {
+                $this->tester = $tester;
+                parent::__construct($aliasName, $connectionDetails);
+            }
+
+            /**
+             * @return AbstractConnection
+             */
+            protected function getConnection(): AbstractConnection
+            {
+                $this->tester->assertTrue(true);
+                return $this->tester->getMockBuilder(AbstractConnection::class)
+                    ->disableOriginalConstructor()
+                    ->getMock();
+            }
+        };
+    }
+
+    public function testReconnect()
+    {
+        $channelMock = $this->getMockBuilder(AMQPChannel::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+        $channelMock->expects($this->once())
+            ->method('close')
+            ->willReturn(null);
+
+        $connectionMock = $this->getMockBuilder(AbstractConnection::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $connectionMock->expects($this->once())
+            ->method('channel')
+            ->willReturn($channelMock);
+        $connectionMock->expects($this->once())
+            ->method('reconnect')
+            ->willReturn(null);
+
+        $amqpConnection = new class('foo', [], $connectionMock) extends AMQPConnection
+        {
+            /**
+             * @var AbstractConnection
+             */
+            private $mock;
+
+            /**
+             *  constructor.
+             *
+             * @param string             $aliasName
+             * @param array              $connectionDetails
+             * @param AbstractConnection $mock
+             */
+            public function __construct($aliasName, array $connectionDetails = [], $mock = null)
+            {
+                $this->mock = $mock;
+                parent::__construct($aliasName, $connectionDetails);
+            }
+
+            /**
+             * @return AbstractConnection
+             */
+            protected function getConnection(): AbstractConnection
+            {
+                return $this->mock;
+            }
+        };
+
+        $amqpConnection->reconnect();
     }
 }

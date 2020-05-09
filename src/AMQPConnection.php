@@ -113,15 +113,17 @@ class AMQPConnection
         array $connectionDetails = []
     ) {
         $this->aliasName = $aliasName;
-        $this->accessKey = $connectionDetails['access_key'];
-        $this->accessSecret = $connectionDetails['access_secret'];
-        $this->resourceOwnerId = $connectionDetails['resource_owner_id'];
-        if ($connectionDetails['access_key'] != ''
-            && $connectionDetails['access_secret'] != ''
-            && $connectionDetails['resource_owner_id'] != ''
-        ) {
-            $connectionDetails['username'] = $this->getUser();
-            $connectionDetails['password'] = $this->getPassword();
+        if (array_key_exists('access_key', $connectionDetails)) {
+            $this->accessKey = $connectionDetails['access_key'];
+            $this->accessSecret = $connectionDetails['access_secret'];
+            $this->resourceOwnerId = $connectionDetails['resource_owner_id'];
+            if ($connectionDetails['access_key'] != ''
+                && $connectionDetails['access_secret'] != ''
+                && $connectionDetails['resource_owner_id'] != ''
+            ) {
+                $connectionDetails['username'] = $this->getUser();
+                $connectionDetails['password'] = $this->getPassword();
+            }
         }
         $this->connectionDetails = $connectionDetails;
         if (isset($connectionDetails['lazy']) && $connectionDetails['lazy'] === false) {
