@@ -35,7 +35,7 @@ A simple rabbitmq library for laravel based on Publish–Subscribe pattern where
 # 1. Install
 Run: 
 ```bash
-composer require needle-project/laravel-rabbitmq
+composer require joker-project/laravel-aliyun-amqp
 ```
 For Laravel version 5.5 or higher the library should be automatically loaded via [Package discovery](https://laravel.com/docs/5.6/packages#package-discovery).
 
