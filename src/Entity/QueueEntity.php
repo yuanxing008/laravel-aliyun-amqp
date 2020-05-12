@@ -296,8 +296,9 @@ class QueueEntity implements PublisherInterface, ConsumerInterface, AMQPEntityIn
         $this->setupConsumer($messages, $seconds, $maxMemory);
         while (false === $this->shouldStopConsuming()) {
             try {
-                $this->getChannel()->wait(null, false, 1);
+                $this->getChannel()->wait();
             } catch (AMQPTimeoutException $e) {
+                $this->logger->debug('startConsuming Exception--->'.$e->getMessage());
                 usleep(1000);
                 $this->getConnection()->reconnect();
                 $this->setupChannelConsumer();
@@ -323,7 +324,7 @@ class QueueEntity implements PublisherInterface, ConsumerInterface, AMQPEntityIn
     {
         if ((microtime(true) - $this->startTime) > $this->limitSecondsUptime) {
             $this->logger->debug(
-                "Stopped consumer",
+                "Stopped consumer, Please make sure you are using supervisor to auto restart consumer",
                 [
                     'limit' => 'time_limit',
                     'value' => sprintf("%.2f", microtime(true) - $this->startTime)
@@ -333,7 +334,7 @@ class QueueEntity implements PublisherInterface, ConsumerInterface, AMQPEntityIn
         }
         if (memory_get_peak_usage(true) >= ($this->limitMemoryConsumption * 1048576)) {
             $this->logger->debug(
-                "Stopped consumer",
+                "Stopped consumer, Please make sure you are using supervisor to auto restart consumer",
                 [
                     'limit' => 'memory_limit',
                     'value' => (int)round(memory_get_peak_usage(true) / 1048576, 2)
@@ -344,7 +345,7 @@ class QueueEntity implements PublisherInterface, ConsumerInterface, AMQPEntityIn
 
         if ($this->getMessageProcessor()->getProcessedMessages() >= $this->limitMessageCount) {
             $this->logger->debug(
-                "Stopped consumer",
+                "Stopped consumer, Please make sure you are using supervisor to auto restart consumer",
                 ['limit' => 'message_count', 'value' => (int)$this->getMessageProcessor()->getProcessedMessages()]
             );
             return true;

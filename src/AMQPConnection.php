@@ -161,6 +161,19 @@ class AMQPConnection
      */
     private function createConnectionByType($type)
     {
+        $connectionDetails = $this->connectionDetails;
+        if (array_key_exists('access_key', $connectionDetails)) {
+            $this->accessKey = $connectionDetails['access_key'];
+            $this->accessSecret = $connectionDetails['access_secret'];
+            $this->resourceOwnerId = $connectionDetails['resource_owner_id'];
+            if ($connectionDetails['access_key'] != ''
+                && $connectionDetails['access_secret'] != ''
+                && $connectionDetails['resource_owner_id'] != ''
+            ) {
+                $this->connectionDetails['username'] = $this->getUser();
+                $this->connectionDetails['password'] = $this->getPassword();
+            }
+        }
         return new $type(
             $this->connectionDetails['hostname'],
             $this->connectionDetails['port'],
