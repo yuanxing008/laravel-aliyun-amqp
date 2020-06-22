@@ -10,14 +10,20 @@ use PhpAmqpLib\Channel\AMQPChannel;
 use PhpAmqpLib\Connection\AbstractConnection;
 use PhpAmqpLib\Connection\AMQPSocketConnection;
 use PhpAmqpLib\Connection\AMQPStreamConnection;
+use PhpAmqpLib\Exception\AMQPChannelClosedException;
+use PhpAmqpLib\Exception\AMQPConnectionClosedException;
+use Psr\Log\LoggerAwareInterface;
+use Psr\Log\LoggerAwareTrait;
 
 /**
  * Class AMQPConnection
  *
  * @package JokerProject\LaravelAliyunAmqp
  */
-class AMQPConnection
+class AMQPConnection implements LoggerAwareInterface
 {
+    use LoggerAwareTrait;
+
     /**
      * @const array Default connections parameters
      */
@@ -201,9 +207,35 @@ class AMQPConnection
      */
     public function reconnect()
     {
-        $this->getConnection()->channel()->close();
-        $this->channel = null;
-        $this->getConnection()->reconnect();
+        try {
+            if (!$this->connection->isConnected()) {
+                $this->connection = $this->getConnection();
+            }
+            if ($this->connection->channel()->is_open()) {
+                $this->connection->channel()->close();
+            }
+            $this->channel = null;
+            $this->getConnection()->reconnect();
+        } catch (AMQPChannelClosedException $e) {
+            $this->logger->info('channel was closed');
+        } catch (AMQPConnectionClosedException $e){
+            $this->getConnection()->reconnect();
+            $this->logger->info('connection was closed');
+        }
+    }
+
+    public function close()
+    {
+        if ($this->channel->is_open()) {
+            $this->channel->close();
+        }
+        if ($this->connection->isConnected()) {
+            try {
+                $this->connection->close();
+            } catch (\Exception $exception) {
+                throw $exception;
+            }
+        }
     }
 
     /**
