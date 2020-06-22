@@ -263,20 +263,25 @@ class QueueEntity implements PublisherInterface, ConsumerInterface, AMQPEntityIn
         }
 
         try {
-            $this->getChannel()
-                ->basic_publish(
-                    new AMQPMessage($message),
-                    '',
-                    $this->attributes['name'],
-                    true
-                );
+            if (!$this->getChannel()->is_open()) {
+                $this->getConnection()->reconnect();
+            }
+            $channel = $this->getChannel();
+            $channel->basic_publish(
+                new AMQPMessage($message),
+                '',
+                $this->attributes['name'],
+                true
+            );
             $this->retryCount = 0;
+            $this->connection->close();
         } catch (AMQPChannelClosedException $exception) {
             $this->retryCount++;
             // Retry publishing with re-connect
             if ($this->retryCount < self::MAX_RETRIES) {
                 $this->getConnection()->reconnect();
                 $this->publish($message, $routingKey);
+                $this->connection->close();
                 return;
             }
             throw $exception;
